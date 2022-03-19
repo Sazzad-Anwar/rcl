@@ -54,7 +54,9 @@ export default function Layout({ children, className }) {
                         </a>
                     </Link>
 
-                    <p className='mt-5 px-5 dark:text-white text-black w-full block py-2 text-2xl font-bold border-b dark:border-b-gray-700 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>Components</p>
+                    <p className='mt-5 px-5 text-black w-full block py-2 text-2xl font-bold border-b dark:border-b-gray-700 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
+                        Components
+                    </p>
 
                     {menulist.map(menuItem => (
                         <Link key={menuItem.id} href={menuItem.link}>
