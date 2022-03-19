@@ -37,20 +37,16 @@ export default function Home() {
             onClick={() => router.push('/documentation')}
             className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
           >
-            <div className='flex justify-center items-center'>
-              <Image src="/rest-api-documentation.png" height={325} width={392} objectFit="contain" alt="documentation-component" />
-            </div>
-            <h1 className='dark:text-white text-2xl text-center font-semibold font-nunito'>React rest api documentation</h1>
+            <div className='flex justify-center items-center h-80 w-full dark:bg-gray-700 bg-gray-300' />
+            <h1 className='mt-4 text-2xl text-center font-extrabold font-nunito purple-text'>React rest api documentation</h1>
           </div>
 
           <div
             onClick={() => router.push('/dark-mode-toggler')}
             className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
           >
-            <div className='flex justify-center items-center'>
-              <Image src="/darkModeToggler.png" height={325} width={392} objectFit="contain" alt="documentation-component" />
-            </div>
-            <h1 className='dark:text-white text-2xl text-center font-semibold font-nunito'>Dark mode toggler</h1>
+            <div className='flex justify-center items-center h-80 w-full dark:bg-gray-700 bg-gray-300' />
+            <h1 className='text-2xl mt-4 text-center font-extrabold font-nunito purple-text'>Dark mode toggler</h1>
           </div>
         </div>
       </Layout>

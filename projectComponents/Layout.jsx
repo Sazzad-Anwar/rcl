@@ -28,7 +28,7 @@ export default function Layout({ children, className }) {
         <div className='dark:bg-gray-900 bg-gray-100 normal-transition overflow-hidden min-h-screen'>
             <header className='border-b fixed top-0 w-full dark:border-b-gray-900 border-b-gray-300 py-2 pr-8  ml-auto bg-gray-100 dark:bg-gray-900 z-10'>
                 <div className='container mx-auto flex justify-between items-center'>
-                    <h1 className='text-2xl normal-transition font-nunito w-auto mx-3 py-3 font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
+                    <h1 className='text-2xl normal-transition font-nunito w-auto mx-3 py-3 font-extrabold purple-text'>
                         React Components Lab
                     </h1>
                     <div className='flex items-center'>
@@ -54,7 +54,7 @@ export default function Layout({ children, className }) {
                         </a>
                     </Link>
 
-                    <p className='mt-5 px-5 text-black w-full block py-2 text-2xl font-bold border-b dark:border-b-gray-700 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
+                    <p className='mt-5 px-5 w-full block py-2 text-2xl font-bold border-b dark:border-b-gray-700 purple-text'>
                         Components
                     </p>
 

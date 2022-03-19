@@ -17,6 +17,9 @@ html {
     .normal-transition {
         @apply transition-all duration-300 ease-in-out;
     }
+    .purple-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -40,4 +43,15 @@ html.dark ::-webkit-scrollbar-track {
 html.dark ::-webkit-scrollbar-thumb {
     background-color: #243763;
     border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    margin-bottom: 0em !important;
 }
