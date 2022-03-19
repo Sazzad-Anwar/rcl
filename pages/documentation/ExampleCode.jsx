@@ -1,5 +1,7 @@
 import React from 'react'
-import Documentation from '../../components/Documentation'
+import Loader from '../../projectComponents/Loader';
+// import Documentation from '../../components/Documentation' // import this component in react like this
+const Documentation = dynamic(() => import('../../components/Documentation'), { ssr: false });
 
 export default function ExampleCode() {
 

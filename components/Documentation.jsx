@@ -52,9 +52,9 @@ const DarkModeToggler = () => {
         >
             {theme === 'dark'
                 ?
-                <BsFillBrightnessHighFill className="bi bi-brightness-high-fill active:animate-ping text-xl dark:text-secondary hover:text-secondary normal-transition peer" />
+                <BsFillBrightnessHighFill className="bi bi-brightness-high-fill active:animate-ping text-xl dark:text-gray-500 text-gray-600 hover:text-black dark:hover:text-white normal-transition" />
                 :
-                <BsFillMoonStarsFill className="bi bi-moon-stars-fill active:animate-ping text-xl dark:text-secondary hover:text-secondary normal-transition" />
+                <BsFillMoonStarsFill className="bi bi-moon-stars-fill active:animate-ping text-xl dark:text-gray-500 text-gray-600 hover:text-black dark:hover:text-white normal-transition" />
             }
         </span>
     );
@@ -348,10 +348,10 @@ const SingleApi = ({ api, index }) => {
 
 
 //main component
-const Documentation = ({ src, title }) => {
+const Documentation = ({ src, title, className }) => {
 
     return (
-        <div className='dark:bg-gray-900 bg-gray-200 normal-transition min-h-screen'>
+        <div className={'dark:bg-gray-900 bg-gray-200 normal-transition min-h-screen ' + (className ? className : '')}>
             <div className='container mx-auto'>
                 <div className='flex justify-between items-center py-3'>
                     <h1 className='text-3xl dark:text-white font-medium font-ubuntu'>{title} <span className='text-base font-ubuntu'>({src.length})</span></h1>

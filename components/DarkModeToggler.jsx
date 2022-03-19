@@ -21,7 +21,7 @@ const DarkModeToggler = () => {
     }, [theme]);
 
     return (
-        <span
+        <button
             onClick={() => {
                 if (theme === 'dark') {
                     localStorage.setItem('theme', 'light');
@@ -35,11 +35,11 @@ const DarkModeToggler = () => {
         >
             {theme === 'dark'
                 ?
-                <BsFillBrightnessHighFill className="bi bi-brightness-high-fill active:animate-ping text-xl dark:text-secondary hover:text-secondary normal-transition peer" />
+                <BsFillBrightnessHighFill className="bi bi-brightness-high-fill active:animate-ping text-xl dark:text-gray-500 text-gray-600 hover:text-black dark:hover:text-white normal-transition" />
                 :
-                <BsFillMoonStarsFill className="bi bi-moon-stars-fill active:animate-ping text-xl dark:text-secondary hover:text-secondary normal-transition" />
+                <BsFillMoonStarsFill className="bi bi-moon-stars-fill active:animate-ping text-xl dark:text-gray-500 text-gray-600 hover:text-black dark:hover:text-white normal-transition" />
             }
-        </span>
+        </button>
     );
 };
 
