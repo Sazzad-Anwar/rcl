@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React from 'react'
 import Loader from '../../projectComponents/Loader';
 // import Documentation from '../../components/Documentation' // import this component in react like this
