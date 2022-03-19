@@ -18,3 +18,26 @@ html {
         @apply transition-all duration-300 ease-in-out;
     }
 }
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0rem;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+    background-color: #e5e7eb;
+    transition: all 0.4s ease-in-out;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+}
+
+html.dark ::-webkit-scrollbar-track {
+    background-color: #0f172a;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+    background-color: #243763;
+    border-radius: 4px;
+}

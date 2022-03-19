@@ -15,11 +15,15 @@ import path from 'path'
 import Alert from '../../projectComponents/Alert';
 
 export const getStaticProps = async () => {
-    let data = fs.readFileSync(path.join(process.cwd(), '/components/Documentation.jsx'), 'utf8');
+    let documentation = fs.readFileSync(path.join(process.cwd(), '/components/Documentation.jsx'), 'utf8');
+    let component = fs.readFileSync(path.join(process.cwd(), '/pages/documentation/ExampleCode.jsx'), 'utf8');
 
     return {
         props: {
-            code: data
+            code: {
+                documentation,
+                component
+            }
         }
     }
 }
@@ -60,24 +64,43 @@ export default function index({ code }) {
                 </div>
             </div>
 
-            <div className="tabs sticky top-4">
+            <div className="tabs">
                 <a onClick={() => setActiveTab('example')} className={`tab tab-bordered ${activeTab === 'example' ? ' tab-active text-[#40a9ff]' : ''} text-lg font-semibold font-nunito`}>Example</a>
                 <a onClick={() => setActiveTab('code')} className={`tab tab-bordered ${activeTab === 'code' ? ' tab-active' : ''} text-black dark:text-white`}>
                     <BsCodeSlash className={`text-2xl font-bold ${activeTab === 'code' ? ' tab-active text-[#40a9ff]' : ''}`} />
                 </a>
-                <a onClick={() => { navigator.clipboard.writeText(code); setCopied(true) }} className="tab tab-bordered cursor-pointer normal-transition group hover:bg-gray-300 dark:hover:bg-gray-800 active:scale-90 scale-100 mx-3">
-                    <button className="dark:border-gray-700 my-1 dark:text-gray-700 text-gray-400 norma-transition dark:group-hover:text-gray-500">
-                        <FaCopy className='text-base' />
-                    </button>
-                </a>
             </div>
             {copied && <Alert message="Copied !" setCopied={setCopied} />}
+
             {activeTab === 'example' && <Documentation src={src} title="API documentation using Documentation component" />}
             {activeTab === 'code' && <>
-                <div className="w-tc-editor-var"> </div>
-                <CodeEditorInput
-                    code={code}
-                />
+                <h1 className='text-lg dark:text-white my-4 sticky top-0'>Documentation.jsx
+                    <a onClick={() => { navigator.clipboard.writeText(code.documentation); setCopied(true) }} className="tab tab-bordered cursor-pointer normal-transition group hover:bg-gray-300 dark:hover:bg-gray-800 active:scale-90 scale-100 mx-3">
+                        <button className="dark:border-gray-700 my-1 dark:text-gray-700 text-gray-400 norma-transition dark:group-hover:text-gray-500">
+                            <FaCopy className='text-base' />
+                        </button>
+                    </a>
+                </h1>
+                <div className='h-96 overflow-auto'>
+                    <div className="w-tc-editor-var"> </div>
+                    <CodeEditorInput
+                        code={code.documentation}
+                    />
+                </div>
+
+                <h1 className='text-lg dark:text-white my-4 sticky top-0'>{'Your component'}.jsx
+                    <a onClick={() => { navigator.clipboard.writeText(code.component); setCopied(true) }} className="tab tab-bordered cursor-pointer normal-transition group hover:bg-gray-300 dark:hover:bg-gray-800 active:scale-90 scale-100 mx-3">
+                        <button className="dark:border-gray-700 my-1 dark:text-gray-700 text-gray-400 norma-transition dark:group-hover:text-gray-500">
+                            <FaCopy className='text-base' />
+                        </button>
+                    </a>
+                </h1>
+                <div className='h-96 overflow-auto mb-5'>
+                    <div className="w-tc-editor-var"> </div>
+                    <CodeEditorInput
+                        code={code.component}
+                    />
+                </div>
             </>}
 
         </Layout>
