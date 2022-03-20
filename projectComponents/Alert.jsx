@@ -10,14 +10,14 @@ export default function Alert({ message, copyElement }) {
         if (copied && !copyShowTimer) {
             copyShowTimer = setTimeout(() => {
                 setCopied(false)
-            }, 30000)
+            }, 3000)
         }
         else {
             clearTimeout(copyShowTimer)
             setCopied(false)
             copyShowTimer = setTimeout(() => {
                 setCopied(false)
-            }, 30000)
+            }, 3000)
         }
 
         return () => clearTimeout(copyShowTimer)

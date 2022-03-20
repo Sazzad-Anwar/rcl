@@ -1,11 +1,6 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import dynamic from 'next/dynamic';
-const DarkModeToggler = dynamic(() => import('../components/DarkModeToggler'), { ssr: false });
-import { useState } from 'react';
-import Menu from '../projectComponents/Menu';
 import Layout from '../projectComponents/Layout';
-import Image from 'next/image';
 import { useRouter } from 'next/router'
 
 export const getStaticProps = async () => {
@@ -34,6 +29,14 @@ export default function Home() {
 
         <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8 md:gap-5 mt-10'>
           <div
+            onClick={() => router.push('/dark-mode-toggler')}
+            className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
+          >
+            <div className='flex justify-center items-center h-80 w-full dark:bg-gray-700 bg-gray-300' />
+            <h1 className='text-2xl mt-4 text-center font-extrabold font-nunito purple-text'>Dark mode toggler</h1>
+          </div>
+
+          <div
             onClick={() => router.push('/documentation')}
             className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
           >
@@ -41,13 +44,6 @@ export default function Home() {
             <h1 className='mt-4 text-2xl text-center font-extrabold font-nunito purple-text'>React rest api documentation</h1>
           </div>
 
-          <div
-            onClick={() => router.push('/dark-mode-toggler')}
-            className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
-          >
-            <div className='flex justify-center items-center h-80 w-full dark:bg-gray-700 bg-gray-300' />
-            <h1 className='text-2xl mt-4 text-center font-extrabold font-nunito purple-text'>Dark mode toggler</h1>
-          </div>
         </div>
       </Layout>
     </>

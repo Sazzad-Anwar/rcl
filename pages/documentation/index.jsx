@@ -7,17 +7,19 @@ import Layout from '../../projectComponents/Layout';
 import Loader from '../../projectComponents/Loader';
 import Head from 'next/head';
 const CodeEditorInput = dynamic(() => import('../../projectComponents/CodeEditorInput'), { ssr: false, loading: () => <Loader /> });
-import { BsCodeSlash } from "react-icons/bs";
+import { BsCodeSlash, BsFullscreen } from "react-icons/bs";
 import { MdWebAsset } from "react-icons/md";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 import fs from 'fs'
 import path from 'path'
 import Alert from '../../projectComponents/Alert';
+import InstallingCodeArea from '../../projectComponents/InstallingCodeArea';
 
 export const getStaticProps = async () => {
     let documentation = fs.readFileSync(path.join(process.cwd(), '/components/Documentation.jsx'), 'utf8');
-    let component = fs.readFileSync(path.join(process.cwd(), '/pages/documentation/ExampleCode.jsx'), 'utf8');
+    let component = fs.readFileSync(path.join(process.cwd(), '/pages/documentation/example.jsx'), 'utf8');
 
     return {
         props: {
@@ -32,6 +34,7 @@ export const getStaticProps = async () => {
 export default function index({ code }) {
 
     const [activeTab, setActiveTab] = useState('example');
+    const router = useRouter();
 
     return (
         <Layout>
@@ -39,20 +42,13 @@ export default function index({ code }) {
                 <title>RCL- Documentation</title>
             </Head>
             <div className='w-auto mb-4'>
-                <h1 className='text-lg dark:text-white normal-transition font-semibold font-nunito mb-3'>
+                <h1 className='text-lg dark:text-white normal-transition font-semibold font-nunito pb-4'>
                     Required npm packages need to be installed.
                 </h1>
-                <div className="mockup-code z-0 dark:bg-gray-900 normal-transition border border-transparent dark:border-gray-700 bg-gray-200 text-black rounded-md dark:text-white font-semibold font-nunito">
-                    <pre data-prefix="$">
-                        <code>npm i react-json-view axios react-icons</code>
-                    </pre>
-                    <div className='w-full text-left my-2 pl-7'>
-                        <span className='text-sm font-nunito'>or using yarn</span>
-                    </div>
-                    <pre data-prefix="$">
-                        <code>yarn add react-json-view axios react-icons</code>
-                    </pre>
-                </div>
+                <InstallingCodeArea
+                    yarn={`yarn add react-json-view axios react-icons`}
+                    npm={`npm i react-json-view axios react-icons`}
+                />
             </div>
 
             <div className="tabs">
@@ -61,6 +57,9 @@ export default function index({ code }) {
                 </a>
                 <a onClick={() => setActiveTab('code')} className={`tab tab-bordered ${activeTab === 'code' ? ' tab-active' : ''} text-black dark:text-white`}>
                     <BsCodeSlash className={`text-2xl font-bold ${activeTab === 'code' ? ' tab-active text-[#40a9ff]' : ''}`} />
+                </a>
+                <a onClick={() => router.push('/documentation/example')} className={`tab tab-bordered text-black dark:text-white`}>
+                    <BsFullscreen className={`text-xl font-bold`} />
                 </a>
             </div>
 

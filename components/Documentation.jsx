@@ -1,15 +1,17 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import axios from 'axios';
 import ReactJson from 'react-json-view'
 import { BsFillBrightnessHighFill, BsFillMoonStarsFill, BsFillPlusSquareFill, BsDashSquareFill, BsCaretRightFill, BsCaretDownFill } from "react-icons/bs";
-import { AiOutlineReload } from "react-icons/ai";
-import 'animate.css';
 
 // loader
 const Loader = () => {
     return (
         <div className='w-full h-full lg:w-96 lg:h-96 lg:mx-auto flex flex-col justify-center items-center'>
-            <AiOutlineReload className='text-4xl font-bold dark:text-white font-ubuntu animate-spin normal-transition mt-2' />
+            {/* <AiOutlineReload className='text-4xl font-bold dark:text-white font-ubuntu animate-spin normal-transition mt-2' /> */}
+            <svg role="status" className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 dark:fill-gray-200 fill-[#4b5563]" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+            </svg>
         </div>
     )
 
@@ -68,7 +70,7 @@ const SingleApi = ({ api, index }) => {
     const [currentOption, setCurrentOption] = useState('body')
     const [inputData, setInputData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-    const [result, setResult] = useState({});
+    const [result, setResult] = useState([]);
     const [fontSize, setFontSize] = useState(14);
     const [queryObject, setQueryObject] = useState({});
     const [headersObject, setHeadersObject] = useState({});
@@ -117,6 +119,10 @@ const SingleApi = ({ api, index }) => {
     }, [api.body.params, api.headers.params, api.query.params, api.url.variables])
 
     setAllData;
+
+    let setAPIresponse = useCallback((data) => {
+        setResult(data)
+    }, [result, fontSize])
 
     useEffect(() => {
         if (api.headers.isRequired) {
@@ -171,7 +177,7 @@ const SingleApi = ({ api, index }) => {
             })
 
 
-            setResult(response.data)
+            setAPIresponse(response.data)
 
             setResultStatus({
                 status: response.status,
@@ -183,7 +189,7 @@ const SingleApi = ({ api, index }) => {
 
         } catch (error) {
 
-            setResult(error.response.data)
+            setAPIresponse(error.response.data)
 
             setResultStatus({
                 status: error.response.status,
@@ -202,7 +208,7 @@ const SingleApi = ({ api, index }) => {
 
     return (
         <div className='my-4'>
-            <div onClick={() => { setOpen(!open); Object.keys(result).length !== 0 && result.length >= 50 ? setResult({}) : null }} className={`w-full cursor-pointer ${open ? 'rounded-tl-2xl rounded-tr-2xl rounded-b-none' : 'rounded-full'} bg-white dark:bg-gray-900 normal-transition border-transparent dark:border dark:border-gray-600 px-1 py-1 flex items-center `}>
+            <button onClick={() => { setOpen(!open); Object.keys(result).length !== 0 && result.length >= 50 ? setAPIresponse({}) : null }} className={`w-full cursor-pointer ${open ? 'rounded-tl-2xl rounded-tr-2xl rounded-b-none' : 'rounded-full'} bg-white dark:bg-gray-900 border-transparent dark:border dark:border-gray-600 px-1 py-1 flex items-center `}>
                 <span
                     className={`px-2.5 py-1 flex justify-center items-center ${open ? 'dark:bg-green-600 bg-green-700 text-white' : 'dark:bg-gray-600 bg-gray-300'} dark:text-white font-medium rounded-full  mr-1`}
                 >
@@ -213,7 +219,7 @@ const SingleApi = ({ api, index }) => {
                     <BsCaretRightFill className='normal-transition dark:text-white text-base lg:text-lg font-ubuntu font-medium' />
                 }
                 <h1 className='dark:text-white text-base lg:text-lg font-ubuntu font-medium ml-3'>{api.name}</h1>
-            </div>
+            </button>
             {open &&
                 <div className='py-3 px-5 bg-white dark:bg-gray-900 border-0 dark:border border-t-none animate__animated animate__fadeIn border-gray-400 dark:border-gray-600 rounded-t-none rounded-bl-2xl rounded-br-2xl'>
                     <h1 className='text-lg my-3 font-ubuntu dark:text-white'>
@@ -302,18 +308,18 @@ const SingleApi = ({ api, index }) => {
                             <div className='flex items-center justify-between'>
                                 <div className='flex items-center mb-3'>
                                     <h1 className='text-base lg:text-lg dark:text-white font-ubuntu font-medium'>Request Result</h1>
-                                    <button onClick={() => setResult({})} className='justify-self-end items-end font-base lg:font-lg font-ubuntu font-medium active:scale-95 normal-transition hover:shadow-lg border-gray-600 px-3 py-.5 dark:border-gray-600 dark:text-white border rounded-md ml-5'>Reset</button>
+                                    <button onClick={() => setAPIresponse({})} className='justify-self-end items-end font-base lg:font-lg font-ubuntu font-medium active:scale-95 normal-transition hover:shadow-lg border-gray-600 px-3 py-.5 dark:border-gray-600 dark:text-white border rounded-md ml-5'>Reset</button>
 
                                 </div>
                                 <div className='flex items-center'>
                                     <div className='flex justify-between items-center mr-4'>
-                                        <button onClick={() => fontSize > 14 && setFontSize(prev => prev - 1)} className='justify-self-end items-end font-base lg:text-lg text-gray-600 font-ubuntu font-medium active:scale-95 hover:shadow-lg border-gray-600 px-1 py-px dark:border-gray-600 dark:text-white'>
+                                        <button onClick={() => fontSize > 14 && setFontSize(prev => prev - 1)} className={'justify-self-end items-end font-base lg:text-lg text-gray-600 font-ubuntu font-medium active:scale-95 hover:shadow-lg border-gray-600 px-1 py-px dark:border-gray-600 dark:text-white' + (fontSize <= 14 ? ' cursor-not-allowed' : '')}>
                                             <BsDashSquareFill />
                                         </button>
                                         <p className='text-base lg:text-lg dark:text-white font-ubuntu font-normal mx-2'>
                                             {fontSize}
                                         </p>
-                                        <button onClick={() => fontSize < 36 && setFontSize(prev => prev + 1)} className='justify-self-end items-end font-base lg:text-lg text-gray-600 font-ubuntu font-medium active:scale-95 hover:shadow-lg border-gray-600 px-1 py-px dark:border-gray-600 dark:text-white'>
+                                        <button onClick={() => fontSize < 36 && setFontSize(prev => prev + 1)} className={'justify-self-end items-end font-base lg:text-lg text-gray-600 font-ubuntu font-medium active:scale-95 hover:shadow-lg border-gray-600 px-1 py-px dark:border-gray-600 dark:text-white' + (fontSize >= 36 ? ' cursor-not-allowed' : '')}>
                                             <BsFillPlusSquareFill />
                                         </button>
                                     </div>

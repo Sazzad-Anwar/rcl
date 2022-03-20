@@ -26,7 +26,7 @@ export default function Layout({ children, className }) {
 
     return (
         <div className='dark:bg-gray-900 bg-gray-100 normal-transition overflow-hidden min-h-screen'>
-            <header className='border-b fixed top-0 w-full dark:border-b-gray-900 border-b-gray-300 py-2 pr-8  ml-auto bg-gray-100 dark:bg-gray-900 z-10'>
+            <header className='border-b fixed top-0 w-full dark:border-b-gray-900 border-b-gray-300 py-2 pr-8  ml-auto bg-gray-100 dark:bg-gray-900 z-20'>
                 <div className='container mx-auto flex justify-between items-center'>
                     <h1 className='text-2xl normal-transition font-nunito w-auto mx-3 py-3 font-extrabold purple-text'>
                         React Components Lab

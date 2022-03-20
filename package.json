@@ -9,6 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@ant-design/icons": "^4.7.0",
         "animate.css": "^4.1.1",
         "antd": "^4.19.2",
         "axios": "^0.26.1",

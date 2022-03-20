@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import React from 'react'
-import Loader from '../../projectComponents/Loader';
 // import Documentation from '../../components/Documentation' // import this component in react like this
 const Documentation = dynamic(() => import('../../components/Documentation'), { ssr: false });
 
@@ -186,5 +185,7 @@ export default function ExampleCode() {
     ]
 
 
-    return <Documentation src={apiJSON} title="API documentation using Documentation component" />
+    return (<>
+        <Documentation src={apiJSON} title="API documentation using Documentation component" />
+    </>)
 }
