@@ -99,6 +99,11 @@ html.dark .ant-menu-vertical-left {
     margin-bottom: 4px !important;
 }
 
+.ant-menu-submenu .ant-menu-submenu .ant-menu-submenu-title {
+    display: flex;
+    align-items: center;
+}
+
 h1,
 h2,
 h3,
