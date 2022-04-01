@@ -45,65 +45,6 @@ html.dark ::-webkit-scrollbar-thumb {
     border-radius: 4px;
 }
 
-/* sidebar style of ant design for dark mode and light mode  */
-html:not(.dark) ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light,
-html:not(.dark) .ant-menu-item,
-.ant-menu-root.ant-menu-vertical {
-    background-color: #fff !important;
-}
-
-html.dark ul.ant-menu.ant-menu-root.ant-menu-inline.ant-menu-light,
-html.dark .ant-menu-item,
-html.dark .ant-menu-root.ant-menu-vertical {
-    background-color: #1f2937 !important;
-    color: #fff !important;
-}
-
-html.dark .ant-menu-submenu-expand-icon,
-html.dark .ant-menu-submenu-arrow {
-    color: #fff !important;
-}
-
-html.dark .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected,
-html.dark .ant-menu-light .ant-menu-item:hover,
-html.dark .ant-menu-submenu.ant-menu-submenu-inline:hover {
-    background-color: #00000054 !important;
-}
-
-html:not(.dark) .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    background-color: #e6f7ff !important;
-}
-
-html:not(.dark) .ant-menu-item:hover {
-    background-color: #e6f7ff !important;
-}
-
-html.dark .ant-menu-inline,
-html.dark .ant-menu-vertical,
-html.dark .ant-menu-vertical-left {
-    border-right: 1px solid #00000054 !important;
-}
-
-.ant-menu-item,
-.ant-menu-submenu-title {
-    height: 45px !important;
-}
-
-html.dark .ant-menu-inline,
-html.dark .ant-menu-vertical,
-html.dark .ant-menu-vertical-left {
-    background: #1f2937 !important;
-}
-
-.ant-menu-inline .ant-menu-item:not(:last-child) {
-    margin-bottom: 4px !important;
-}
-
-.ant-menu-submenu .ant-menu-submenu .ant-menu-submenu-title {
-    display: flex;
-    align-items: center;
-}
-
 h1,
 h2,
 h3,

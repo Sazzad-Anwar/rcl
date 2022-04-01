@@ -44,6 +44,14 @@ export default function Home() {
             <h1 className='mt-4 text-2xl text-center font-extrabold font-nunito purple-text'>React rest api documentation</h1>
           </div>
 
+          <div
+            onClick={() => router.push('/admin-panel-sidebar')}
+            className='w-full h-96 cursor-pointer active:scale-90 scale-100 shadow-lg rounded-lg hover:shadow-2xl normal-transition border dark:border-gray-700'
+          >
+            <div className='flex justify-center items-center h-80 w-full dark:bg-gray-700 bg-gray-300' />
+            <h1 className='mt-4 text-2xl text-center font-extrabold font-nunito purple-text'>Admin Panel Layout</h1>
+          </div>
+
         </div>
       </Layout>
     </>

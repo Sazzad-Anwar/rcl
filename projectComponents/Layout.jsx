@@ -21,6 +21,11 @@ export default function Layout({ children, className }) {
             link: '/documentation',
             id: 'rest-api-docs'
         },
+        {
+            name: 'Admin Layout',
+            link: '/admin-panel-sidebar',
+            id: 'admin-panel-sidebar'
+        },
 
     ]
 
