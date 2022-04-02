@@ -99,7 +99,6 @@ export default function AdminLayout() {
         {
             name: 'Category',
             hasSubMenu: true,
-            icon: 'BiCategory',
             id: 'category',
             icon: <BiCategory size={20} />,
             subMenu: [

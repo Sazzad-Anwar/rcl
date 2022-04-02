@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable react-hooks/rules-of-hooks */
 import Head from 'next/head'
 import { useState } from 'react'
 import Layout from '../../projectComponents/Layout'
