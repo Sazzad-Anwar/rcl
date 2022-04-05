@@ -114,3 +114,8 @@ html.dark .ant-menu-vertical-left {
     display: flex;
     align-items: center;
 }
+
+.ant-menu-item-only-child {
+    display: flex !important;
+    align-items: center !important;
+}
