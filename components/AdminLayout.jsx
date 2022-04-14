@@ -1,9 +1,11 @@
 import { useState } from "react";
 import DarkModeToggler from "./DarkModeToggler";
-import { BsFillMenuButtonWideFill, BsFillMenuAppFill } from "react-icons/bs";
+import { RiMenuFoldLine, RiMenuUnfoldLine } from 'react-icons/ri'
 import { Affix, Menu } from "antd";
 import { RiDashboardLine } from "react-icons/ri";
 import { BiCategory } from "react-icons/bi";
+import { AiFillCode } from 'react-icons/ai';
+import { ImUsers } from 'react-icons/im';
 import { VscAccount } from 'react-icons/vsc';
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +13,13 @@ import Link from "next/link";
 const { SubMenu } = Menu;
 
 const SideBar = ({ collapsed, menulist, admin }) => {
+
     return (
         <div
             className={`${collapsed ? "w-auto" : "w-72"} normal-transition h-screen`}
         >
             <Menu
-                defaultSelectedKeys={["0"]}
+                defaultSelectedKeys={['/']}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
                 inlineCollapsed={collapsed}
@@ -131,9 +134,9 @@ const Header = ({ setShowSidebar, showSidebar }) => {
                         className="normal-transition absolute top-1/2 left-3 -translate-y-1/2 scale-100 cursor-pointer rounded-md bg-gray-300 p-2 active:scale-90 dark:bg-gray-600"
                     >
                         {showSidebar ? (
-                            <BsFillMenuButtonWideFill className="normal-transition text-2xl text-black active:rotate-[360deg] dark:text-white" />
+                            <RiMenuUnfoldLine className="normal-transition text-2xl text-black active:rotate-[360deg] dark:text-white" />
                         ) : (
-                            <BsFillMenuAppFill className="normal-transition text-2xl text-black active:rotate-[360deg] dark:text-white" />
+                            <RiMenuFoldLine className="normal-transition text-2xl text-black active:rotate-[360deg] dark:text-white" />
                         )}
                     </button>
                 </div>
@@ -152,14 +155,28 @@ export default function AdminLayout() {
         {
             name: "Home",
             link: "/",
-            id: "home",
-            icon: <RiDashboardLine size={30} />,
+            id: "/",
+            icon: <RiDashboardLine size={20} />,
             hasSubMenu: false,
+        },
+        {
+            name: 'API Docs',
+            link: '/docs',
+            hasSubMenu: false,
+            id: '/docs',
+            icon: <AiFillCode size={20} />,
+        },
+        {
+            name: 'Users',
+            link: '/users',
+            link: '/users',
+            hasSubMenu: false,
+            icon: <ImUsers size={20} />
         },
         {
             name: "Category",
             hasSubMenu: true,
-            id: "category",
+            id: "/category",
             icon: <BiCategory size={20} />,
             subMenu: [
                 {
@@ -184,6 +201,7 @@ export default function AdminLayout() {
                 },
             ],
         },
+
     ];
 
     let admin = {
@@ -196,22 +214,24 @@ export default function AdminLayout() {
     return (
         <div className="flex w-full items-start bg-gray-100 dark:bg-gray-800">
             <Affix>
-                <div className="flex items-center justify-center">
-                    <Image
-                        src={
-                            "https://images.pexels.com/photos/430205/pexels-photo-430205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                        }
-                        height={60}
-                        width={collapsed ? 60 : 112}
-                        className={
-                            collapsed
-                                ? "normal-transition rounded-full h-14 w-14"
-                                : "normal-transition h-auto w-28"
-                        }
-                        alt="logo"
-                    />
+                <div>
+                    <div className="flex items-center justify-center">
+                        <Image
+                            src={
+                                "https://images.pexels.com/photos/430205/pexels-photo-430205.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                            }
+                            height={60}
+                            width={collapsed ? 60 : 112}
+                            className={
+                                collapsed
+                                    ? "normal-transition rounded-full h-14 w-14"
+                                    : "normal-transition h-auto w-28"
+                            }
+                            alt="logo"
+                        />
+                    </div>
+                    <SideBar collapsed={collapsed} menulist={menulist} admin={admin} />
                 </div>
-                <SideBar collapsed={collapsed} menulist={menulist} admin={admin} />
             </Affix>
             <div className="normal-transition h-screen w-full">
                 <Header setShowSidebar={setCollapsed} showSidebar={collapsed} />

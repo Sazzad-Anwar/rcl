@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 const AdminLayout = dynamic(() => import('../../components/AdminLayout'), { ssr: false });
 
 
-export default function exampleCode() {
+export default function ExampleCode() {
     return (<>
         <AdminLayout />
     </>)
