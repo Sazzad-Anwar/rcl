@@ -13,22 +13,22 @@ const { SubMenu } = Menu;
 const SideBar = ({ collapsed, menulist, admin }) => {
     return (
         <div
-            className={`${collapsed ? "w-auto" : "w-80"} normal-transition h-screen`}
+            className={`${collapsed ? "w-auto" : "w-72"} normal-transition h-screen`}
         >
             <Menu
-                defaultSelectedKeys={["1"]}
+                defaultSelectedKeys={["0"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
                 inlineCollapsed={collapsed}
-                className="h-full relative"
+                className="h-full relative border-r"
             >
-                {menulist.map((menu) => {
+                {menulist.map((menu, index) => {
                     if (menu.hasSubMenu) {
                         return (
                             <SubMenu
                                 key={menu.id}
                                 icon={menu.icon}
-                                title={<p className="text-lg">{menu.name}</p>}
+                                title={<p className="text-base">{menu.name}</p>}
                             >
                                 {menu.subMenu.map((subMenu) => {
                                     if (subMenu.hasSubMenu) {
@@ -36,7 +36,7 @@ const SideBar = ({ collapsed, menulist, admin }) => {
                                             <SubMenu
                                                 className="dark:text-white"
                                                 key={subMenu.id}
-                                                title={<p className="text-lg">{subMenu.name}</p>}
+                                                title={<p className="text-base">{subMenu.name}</p>}
                                             >
                                                 {subMenu.subMenu.map((subSubMenu) => {
                                                     if (subSubMenu.hasSubMenu) {
@@ -45,7 +45,7 @@ const SideBar = ({ collapsed, menulist, admin }) => {
                                                                 className="dark:text-white"
                                                                 key={subSubMenu.id}
                                                                 title={
-                                                                    <p className="text-lg">{subSubMenu.name}</p>
+                                                                    <p className="text-base">{subSubMenu.name}</p>
                                                                 }
                                                             >
                                                                 {subSubMenu.subMenu.map((subSubSubMenu) => (
@@ -81,24 +81,39 @@ const SideBar = ({ collapsed, menulist, admin }) => {
                                 })}
                             </SubMenu>
                         );
-                    }
-                    else {
+                    } else {
                         return (
-                            <Menu.Item key="1" icon={<RiDashboardLine size={20} />}>
-                                <span className="text-lg">{menu.name}</span>
+                            <Menu.Item key={index} icon={menu.icon} className="border-r border-black">
+                                <span className="text-lg dark:text-white">{menu.name}</span>
                             </Menu.Item>
                         );
                     }
                 })}
-
-                <Menu.Item className={`absolute bottom-16 w-full ${collapsed ? 'py-0' : 'py-10'}`} icon={<VscAccount size={28} />}>
-                    <Link href="/" >
-                        <a className="flex flex-col dark:text-white">
+                <SubMenu
+                    className={`absolute bottom-[55px] w-full ${collapsed ? "py-0" : "pt-2 pb-4"
+                        }`}
+                    icon={<VscAccount size={28} />}
+                    key={menulist.length + 1}
+                    title={
+                        <div className="flex flex-col dark:text-white pb-2">
                             <span className="text-lg">{admin.name}</span>
                             <span className="text-sm">{admin.email}</span>
-                        </a>
-                    </Link>
-                </Menu.Item>
+                        </div>
+                    }
+                >
+                    {admin.hasSubMenu &&
+                        admin.subMenu.map((subMenu, index) => (
+                            <Menu.Item
+                                key={index + 1}
+                                className={`text-base ${collapsed ? "pl-auto" : "pl-16"
+                                    } dark:text-white`}
+                            >
+                                <Link to={subMenu.link} className="dark:text-white">
+                                    {subMenu.name}
+                                </Link>
+                            </Menu.Item>
+                        ))}
+                </SubMenu>
             </Menu>
         </div>
     );
